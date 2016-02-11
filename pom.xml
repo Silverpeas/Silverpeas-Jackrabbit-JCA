@@ -173,10 +173,6 @@
           <artifactId>commons-compress</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>com.drewnoakes</groupId>
-          <artifactId>metadata-extractor</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>edu.ucar</groupId>
           <artifactId>netcdf</artifactId>
         </exclusion>
