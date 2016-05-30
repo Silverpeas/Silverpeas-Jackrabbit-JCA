@@ -169,10 +169,6 @@
           <artifactId>asm-debug-all</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>org.apache.commons</groupId>
-          <artifactId>commons-compress</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>edu.ucar</groupId>
           <artifactId>netcdf</artifactId>
         </exclusion>
