@@ -75,10 +75,12 @@
   </distributionManagement>
 
   <properties>
+    <!-- property used by the CI to both deploy a build version and release the next stable version -->
+    <next.release>2.14.4</next.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jackrabbit.version>2.14.4</jackrabbit.version>
     <tika.version>1.16</tika.version>
-    <silverpeas-jca.version>1.0-SNAPSHOT</silverpeas-jca.version>
+    <silverpeas-jca.version>1.0-build180123</silverpeas-jca.version>
   </properties>
 
   <build>
