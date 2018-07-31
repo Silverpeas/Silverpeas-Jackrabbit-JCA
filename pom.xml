@@ -25,7 +25,7 @@
   <groupId>org.silverpeas.jcr</groupId>
   <artifactId>jackrabbit-jca</artifactId>
   <packaging>rar</packaging>
-  <version>2.16.2-SNAPSHOT</version>
+  <version>2.16.2</version>
   <name>Jackrabbit JCA Resource Adapter</name>
   <url>http://www.silverpeas.org</url>
 
