@@ -25,7 +25,7 @@
   <groupId>org.silverpeas.jcr</groupId>
   <artifactId>jackrabbit-jca</artifactId>
   <packaging>rar</packaging>
-  <version>2.16.3-SNAPSHOT</version>
+  <version>2.18.1-SNAPSHOT</version>
   <name>Jackrabbit JCA Resource Adapter</name>
   <url>http://www.silverpeas.org</url>
 
@@ -76,17 +76,22 @@
 
   <properties>
     <!-- property used by the CI to both deploy a build version and release the next stable version -->
-    <next.release>2.16.3</next.release>
+    <next.release>2.18.1</next.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jackrabbit.version>2.16.3</jackrabbit.version>
-    <tika.version>1.18</tika.version>
-    <silverpeas-jca.version>1.2-build180829</silverpeas-jca.version>
+    <jackrabbit.version>2.18.1</jackrabbit.version>
+    <tika.version>1.20</tika.version>
+    <silverpeas-jca.version>1.2-build190503</silverpeas-jca.version>
   </properties>
 
   <build>
     <finalName>${project.artifactId}</finalName>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-rar-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
@@ -99,10 +104,24 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jarsigner-plugin</artifactId>
-          <version>1.4</version>
+          <version>3.0.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-rar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <index>true</index>
+            <manifestEntries>
+              <Dependencies>org.apache.xerces, org.apache.commons.lang3, org.slf4j</Dependencies>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 
   <dependencies>
@@ -116,6 +135,7 @@
       <artifactId>access-control</artifactId>
       <version>${silverpeas-jca.version}</version>
     </dependency>
+    <!-- Excludes the Tika dependencies to specify our own version of them (more recent) -->
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>jackrabbit-jca</artifactId>
@@ -134,6 +154,26 @@
           <groupId>org.apache.derby</groupId>
           <artifactId>derby</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpcore</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpmime</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>jcl-over-slf4j</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -151,9 +191,32 @@
         </exclusion>
         <exclusion>
           <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpcore</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
           <artifactId>httpclient</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpmime</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>jcl-over-slf4j</artifactId>
+        </exclusion>
       </exclusions>
+    </dependency>
+    <!-- We define our own version of Tika. But we exclude some of its dependencies to specify our
+     own version of them (more recent) -->
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-core</artifactId>
+      <version>1.20</version>
     </dependency>
     <dependency>
       <groupId>org.apache.tika</groupId>
@@ -161,60 +224,62 @@
       <version>${tika.version}</version>
       <exclusions>
         <exclusion>
-          <groupId>com.drewnoakes</groupId>
-          <artifactId>metadata-extractor</artifactId>
+          <groupId>com.rometools</groupId>
+          <artifactId>rome</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.james</groupId>
-          <artifactId>apache-mime4j-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.james</groupId>
-          <artifactId>apache-mime4j-dom</artifactId>
+          <groupId>org.jdom</groupId>
+          <artifactId>jdom2</artifactId>
         </exclusion>
         <exclusion>
           <groupId>de.l3s.boilerpipe</groupId>
           <artifactId>boilerpipe</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>org.ow2.asm</groupId>
-          <artifactId>asm-debug-all</artifactId>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-lang3</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>edu.ucar</groupId>
-          <artifactId>netcdf</artifactId>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>com.rometools</groupId>
-          <artifactId>rome</artifactId>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>org.quartz-scheduler0</groupId>
-          <artifactId>quartz</artifactId>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>com.uwyn</groupId>
-          <artifactId>jhighlight</artifactId>
+          <groupId>javax.annotation</groupId>
+          <artifactId>javax.annotation-api</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpcore</artifactId>
+          <groupId>com.sun.activation</groupId>
+          <artifactId>javax.activation</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.glassfish.jaxb</groupId>
+          <artifactId>jaxb-runtime</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.cxf</groupId>
+          <artifactId>cxf-rt-rs-client</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>jul-to-slf4j </artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>jcl-over-slf4j</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.drewnoakes</groupId>
-      <artifactId>metadata-extractor</artifactId>
-      <version>2.10.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>4.5.5</version>
     </dependency>
   </dependencies>
 
