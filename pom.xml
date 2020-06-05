@@ -80,7 +80,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jackrabbit.version>2.18.4</jackrabbit.version>
     <tika.version>1.22</tika.version>
-    <silverpeas-jca.version>1.3-build191121</silverpeas-jca.version>
+    <silverpeas-jca.version>1.3</silverpeas-jca.version>
   </properties>
 
   <build>
