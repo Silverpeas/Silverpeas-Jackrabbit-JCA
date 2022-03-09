@@ -25,7 +25,7 @@
   <groupId>org.silverpeas.jcr</groupId>
   <artifactId>jackrabbit-jca</artifactId>
   <packaging>rar</packaging>
-  <version>2.20.3-SNAPSHOT</version>
+  <version>2.20.4-SNAPSHOT</version>
   <name>Jackrabbit JCA Resource Adapter</name>
   <url>https://www.silverpeas.org</url>
 
@@ -76,10 +76,10 @@
 
   <properties>
     <!-- property used by the CI to both deploy a build version and release the next stable version -->
-    <next.release>2.20.3</next.release>
+    <next.release>2.20.4</next.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jackrabbit.version>2.20.3</jackrabbit.version>
-    <tika.version>1.27</tika.version>
+    <jackrabbit.version>2.20.4</jackrabbit.version>
+    <tika.version>1.28.1</tika.version>
     <silverpeas-jca.version>1.4</silverpeas-jca.version>
   </properties>
 
