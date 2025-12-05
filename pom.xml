@@ -79,7 +79,7 @@
     <next.release>2.20.14</next.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jackrabbit.version>2.20.14</jackrabbit.version>
-    <tika.version>2.4.1</tika.version>
+    <tika.version>3.2.2</tika.version>
     <silverpeas-jca.version>1.4</silverpeas-jca.version>
   </properties>
 
